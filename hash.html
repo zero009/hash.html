@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>hash</title>
+</head>
+<body>
+	<input type="button" value="随机选择" id="input1"></input>
+	<div id="div1"></div>
+</body>
+<script type="text/javascript">
+	var oIpt = document.querySelector('input');
+	var oDiv = document.querySelector('div');
+	var json = {};
+	oIpt.onclick = function(){
+		var num = Math.random();
+		var arr = randomNum(35,7);//从0~35之间取随机的7位数
+		json[num] = arr ;
+		oDiv.innerHTML = arr;
+		window.location.hash = num ;
+	}
+	window.onhashchange = function(){
+
+		oDiv.innerHTML = json[window.location.hash.substring(1)];
+	}
+	function randomNum(iAll,iNow){
+		var arr = [];
+		var newArr = [];
+		for(var i=1;i<iAll;i++){
+			arr.push(i);
+		};
+		for(var i=0;i<iNow;i++){
+			newArr.push(arr.splice(Math.floor(Math.random()*arr.length),1))
+		}
+		return newArr;
+	}
+</script>
+</html>
